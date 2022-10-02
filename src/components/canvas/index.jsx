@@ -37,6 +37,7 @@ const Canvas = () => {
             href='https://www.linkedin.com/in/anggiat-benget-napitupulu-2994a2146/'
             target='_blank'
             className='canvas_btn'
+            rel='noreferrer'
           >
             <span>My LinkedIn</span>
             <BsChevronCompactRight />
