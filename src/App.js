@@ -1,10 +1,12 @@
-import './App.css'
-import Komponent from './Materi/Komponen'
+import Home from './pages/home'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div className='App'>
-      <Komponent />
+    <div>
+      <Routes>
+        <Route path='/' element={<Home />} exact />
+      </Routes>
     </div>
   )
 }
