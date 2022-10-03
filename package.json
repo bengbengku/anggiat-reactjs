@@ -16,6 +16,7 @@
     "sass": "^1.55.0",
     "serve": "^14.0.1",
     "styled-components": "^5.3.6",
+    "validatorjs": "^3.22.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
