@@ -2,7 +2,8 @@ html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: #202023;
+  /* background: #202023; */
+  background: #fff;
 }
 
 *,
