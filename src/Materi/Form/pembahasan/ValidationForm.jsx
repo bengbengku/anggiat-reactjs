@@ -1,49 +1,32 @@
 import React from 'react'
 import * as Validator from 'validatorjs'
-
-const Input = ({ label, type, name, onChange, value }) => {
-  return (
-    <div style={{ margin: '5px 0', width: '100%' }}>
-      <label>{label}</label>
-      <br />
-      <input
-        type={type}
-        name={name}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        style={{ width: '100%' }}
-      />
-      <br />
-    </div>
-  )
-}
-
-const ShowErrors = ({ errors }) => {
-  return (
-    <ul style={{ color: 'red', listStyleType: 'none' }}>
-      {errors.map((err, i) => (
-        <li key={i}>{err}</li>
-      ))}
-    </ul>
-  )
-}
+import FormInput from './FormInput'
+import ShowAlert from './ShowAlert'
+import ShowError from './ShowError'
 
 export default class ValidationForm extends React.Component {
   state = {
+    namaDepan: '',
+    namaBelakang: '',
     email: '',
     password: '',
     errors: [],
+    showAlert: false,
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { email, password } = this.state
+    const { email, password, namaDepan, namaBelakang } = this.state
     let data = {
       email,
       password,
+      namaDepan,
+      namaBelakang,
     }
 
     let rules = {
+      namaDepan: 'min:3|required',
+      namaBelakang: 'min:3|required',
       email: [
         'required',
         'regex:/^([a-zd.-]+)@([a-zd-]+).([a-z]{2,12})(.[a-z]{2,12})?$/',
@@ -56,16 +39,15 @@ export default class ValidationForm extends React.Component {
     validation.passes()
     this.setState({
       errors: [
+        ...validation.errors.get('namaDepan'),
+        ...validation.errors.get('namaBelakang'),
         ...validation.errors.get('email'),
         ...validation.errors.get('password'),
       ],
     })
     if (validation.errorCount === 0) {
-      alert(`Email: ${this.state.email}`)
       this.setState({
-        email: '',
-        password: '',
-        errors: [],
+        showAlert: true,
       })
     }
   }
@@ -78,20 +60,42 @@ export default class ValidationForm extends React.Component {
           padding: '20px',
         }}
       >
+        {this.state.showAlert && (
+          <ShowAlert
+            namaDepan={this.state.namaDepan}
+            namaBelakang={this.state.namaBelakang}
+            email={this.state.email}
+            password={this.state.password}
+          />
+        )}
         <form
           style={{ padding: '2rem', border: '1px solid #000' }}
           onSubmit={this.handleSubmit}
         >
-          <h4>Login Page</h4>
-          {this.state.errors && <ShowErrors errors={this.state.errors} />}
-          <Input
+          <h4>Form Register</h4>
+          {this.state.errors && <ShowError errors={this.state.errors} />}
+          <FormInput
+            label='Nama Depan'
+            type='text'
+            name='nama_depan'
+            onChange={(value) => this.setState({ namaDepan: value })}
+            value={this.state.namaDepan}
+          />
+          <FormInput
+            label='Nama Belakang'
+            type='text'
+            name='nama_belakang'
+            onChange={(value) => this.setState({ namaBelakang: value })}
+            value={this.state.namaBelakang}
+          />
+          <FormInput
             label='Email'
             type='email'
             name='email'
             onChange={(value) => this.setState({ email: value })}
             value={this.state.email}
           />
-          <Input
+          <FormInput
             label='Password'
             type='password'
             name='password'
@@ -100,7 +104,7 @@ export default class ValidationForm extends React.Component {
           />
           <br />
           <button type='submit' style={{ width: '100%' }}>
-            Login
+            Register
           </button>
         </form>
       </div>
