@@ -14,7 +14,7 @@ export default class CardLayout extends React.Component {
           {this.props.loading ? (
             <Row>
               <Col className='d-flex justify-content-md-center py-3'>
-                <PulseLoader color='#373232' size={20} />
+                <PulseLoader color='#e46258' size={20} />
               </Col>
             </Row>
           ) : (
