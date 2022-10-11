@@ -25,7 +25,7 @@ export default class CardLayout extends React.Component {
                     <Card.Img
                       variant='top'
                       src={
-                        d.urlToImage
+                        d.urlToImage !== null
                           ? d.urlToImage
                           : 'https://res.cloudinary.com/dzwhzly1e/image/upload/v1664573876/random/Image_not_available_evkjjr.png'
                       }
