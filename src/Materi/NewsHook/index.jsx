@@ -21,20 +21,20 @@ const NewsHook = () => {
   console.log(news)
 
   useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://newsapi.org/v2/top-headlines?country=id&q=${search}&apiKey=${apiKey}`
+        )
+        setNews(data.articles)
+        setLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     fetchNews()
   }, [search])
 
-  const fetchNews = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://newsapi.org/v2/top-headlines?country=id&q=${search}&apiKey=${apiKey}`
-      )
-      setNews(data.articles)
-      setLoading(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }
   return (
     <>
       <Row className='g-0'>
