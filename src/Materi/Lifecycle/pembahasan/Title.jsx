@@ -10,7 +10,7 @@ export default class Title extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('get derived state from props')
+    console.group('get derived state from props')
     console.log('props:', props)
     console.log('state:', state)
     console.groupEnd()
