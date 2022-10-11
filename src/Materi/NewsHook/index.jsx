@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import axios from 'axios'
 import CardLayout from './CardLayout'
+import NavbarLayout from '../NavbarLayout'
 
 const apiKey = '60ee971353de4312824f5672323db06f'
 let dummyLorem =
@@ -38,16 +37,7 @@ const NewsHook = () => {
   return (
     <>
       <Row className='g-0'>
-        <Col>
-          <Navbar bg='dark' variant='dark'>
-            <Container>
-              <Navbar.Brand href='#home'>React Hook News</Navbar.Brand>
-              <Nav className='me-auto'>
-                <Nav.Link href='#home'>Home</Nav.Link>
-              </Nav>
-            </Container>
-          </Navbar>
-        </Col>
+        <NavbarLayout />
       </Row>
       <Container style={{ height: '100%' }}>
         <Row className='py-4'>
