@@ -1,15 +1,17 @@
+import * as counter from './constants'
+
 let initialState = {
   count: 0,
 }
 
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case counter.INCREMENT:
       return {
         ...state,
         count: state.count + action.payload,
       }
-    case 'DECREMENT':
+    case counter.DECREMENT:
       return {
         ...state,
         count: state.count - action.payload,
@@ -18,3 +20,5 @@ const counterReducer = (state = initialState, action) => {
       return state
   }
 }
+
+export default counterReducer

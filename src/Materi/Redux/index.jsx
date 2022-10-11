@@ -1,19 +1,13 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import store from '../../app/store'
+import CounterRedux from './pembahasan/CounterRedux'
 
 const Redux = () => {
   return (
-    <div
-      style={{
-        padding: '2rem',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      <button style={{ width: '50px' }}>-</button>{' '}
-      <span style={{ padding: '0 1rem' }}>0</span>{' '}
-      <button style={{ width: '50px' }}>+</button>
-    </div>
+    <Provider store={store}>
+      <CounterRedux />
+    </Provider>
   )
 }
 
