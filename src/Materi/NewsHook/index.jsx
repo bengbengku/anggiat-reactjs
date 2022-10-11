@@ -11,8 +11,6 @@ import axios from 'axios'
 import CardLayout from './CardLayout'
 
 const apiKey = '60ee971353de4312824f5672323db06f'
-const nullImg =
-  'https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png'
 let dummyLorem =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.'
 
