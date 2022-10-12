@@ -10,7 +10,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import axios from 'axios'
 import CardLayout from './pembahasan/CardLayout'
 
-const apiKey = '60ee971353de4312824f5672323db06f'
+const apiKey = 'c25267a46a0843dcb8366de2101507d5'
 const nullImg =
   'https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png'
 let dummyLorem =
@@ -26,8 +26,8 @@ export default class Lifecycle extends React.Component {
     }
   }
 
-  getData = async (search) => {
-    let trendingHeadlinesEndpoint = `https://newsapi.org/v2/top-headlines?country=id&q=${search}&apiKey=${apiKey}`
+  getData = async () => {
+    let trendingHeadlinesEndpoint = `https://newsapi.org/v2/top-headlines?country=id&q=${this.state.search}&apiKey=${apiKey}`
     try {
       const { data } = await axios.get(trendingHeadlinesEndpoint)
       this.setState({ news: data.articles })
@@ -37,20 +37,17 @@ export default class Lifecycle extends React.Component {
       console.log(error)
     }
   }
-
-  async componentDidMount() {
-    await this.getData('')
+  componentDidMount() {
+    this.getData()
   }
 
-  async componentDidUpdate(pP, pS, sS) {
-    const { search } = pS
-    if (search.length > 0) {
-      await this.getData(search)
-    }
+  handleSearch = (e) => {
+    this.setState({ search: e.target.value })
+    this.setState({ loading: true })
+    this.getData()
   }
 
   render() {
-    // console.log(this.state.news)
     return (
       <>
         <Row className='g-0'>
@@ -73,7 +70,7 @@ export default class Lifecycle extends React.Component {
                   placeholder='Pencarian'
                   aria-label="Recipient's username"
                   aria-describedby='basic-addon2'
-                  onChange={(e) => this.setState({ search: e.target.value })}
+                  onChange={this.handleSearch}
                 />
                 <Button variant='outline-secondary' id='button-addon2'>
                   Search
