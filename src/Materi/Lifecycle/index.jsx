@@ -26,8 +26,8 @@ export default class Lifecycle extends React.Component {
     }
   }
 
-  getData = async () => {
-    let trendingHeadlinesEndpoint = `https://newsapi.org/v2/top-headlines?country=id&q=${this.state.search}&apiKey=${apiKey}`
+  getData = async (search) => {
+    let trendingHeadlinesEndpoint = `https://newsapi.org/v2/top-headlines?country=id&q=${search}&apiKey=${apiKey}`
     try {
       const { data } = await axios.get(trendingHeadlinesEndpoint)
       this.setState({ news: data.articles })
@@ -37,14 +37,14 @@ export default class Lifecycle extends React.Component {
       console.log(error)
     }
   }
-  componentDidMount() {
-    this.getData()
+  async componentDidMount() {
+    await this.getData('')
   }
 
   handleSearch = (e) => {
     this.setState({ search: e.target.value })
     this.setState({ loading: true })
-    this.getData()
+    this.getData(e.target.value)
   }
 
   render() {
@@ -70,7 +70,7 @@ export default class Lifecycle extends React.Component {
                   placeholder='Pencarian'
                   aria-label="Recipient's username"
                   aria-describedby='basic-addon2'
-                  onChange={this.handleSearch}
+                  onKeyUp={this.handleSearch}
                 />
                 <Button variant='outline-secondary' id='button-addon2'>
                   Search
